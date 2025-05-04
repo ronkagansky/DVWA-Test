@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: jfrog/setup-jfrog-cli@v4
         with:
-          oidc-provider-name: evidence
+          oidc-provider-name: evidence-ron
       - name: Setup JFrog CLI
         run: |
           jf --version
