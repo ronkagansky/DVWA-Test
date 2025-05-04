@@ -20,7 +20,8 @@ jobs:
       IMG_NAME: ${{ github.repository }}
       JF_URL: "https://accenture2025.jfrog.io/"
       JFROG_CLI_BUILD_NAME: "dvwa-ci"
-      JFROG_CLI_BUILD_NUMBER: ${{ github.run_id }}
+      #JFROG_CLI_BUILD_NUMBER: ${{ github.run_id }}
+      JFROG_CLI_BUILD_NUMBER: '11111'
     permissions:
       id-token: write
       contents: read
