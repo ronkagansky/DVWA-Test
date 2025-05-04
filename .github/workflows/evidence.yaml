@@ -20,8 +20,7 @@ jobs:
       IMG_NAME: ${{ github.repository }}
       JF_URL: "https://accenture2025.jfrog.io/"
       JFROG_CLI_BUILD_NAME: "dvwa-ci"
-      #JFROG_CLI_BUILD_NUMBER: ${{ github.run_id }}
-      JFROG_CLI_BUILD_NUMBER: '11111'
+      JFROG_CLI_BUILD_NUMBER: ${{ github.run_id }}
     permissions:
       id-token: write
       contents: read
@@ -42,10 +41,12 @@ jobs:
         run: |
           openssl genrsa -out private.pem 2048
           openssl rsa -in private.pem -pubout -out public.pem
-          echo "{
-            \"name\": \"${{ github.workflow }}\",
-            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
-            \"initiator\": \"${{ github.actor }}\"
-          }" > run_info.json
-          jf evd create --predicate ./run_info.json --predicate-type https://in-toto.io/attestation/test-result/v0.1 --build-name 111111 --build-number $JFROG_CLI_BUILD_NUMBER --key ./private.pem
+          cat <<EOF > run_info.json
+            {
+              "name": "${{ github.workflow }}",
+              "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+              "initiator": "${{ github.actor }}"
+            }
+          EOF
+          jf evd create --predicate ./run_info.json --predicate-type https://in-toto.io/attestation/test-result/v0.1 --build-name $JFROG_CLI_BUILD_NAME --build-number $JFROG_CLI_BUILD_NUMBER --key ./private.pem
 #          jfrog rt bdc workshop-docker-local --image-file image-file-details --build-name $build-name --build-number $build-number
