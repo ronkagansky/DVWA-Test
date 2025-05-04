@@ -47,5 +47,5 @@ jobs:
             \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
             \"initiator\": \"${{ github.actor }}\"
           }" > run_info.json
-          jf evd create --predicate ./run_info.json --predicate-type https://in-toto.io/attestation/test-result/v0.1 --build-name $JFROG_CLI_BUILD_NAME --build-number $JFROG_CLI_BUILD_NUMBER --key ./private.pem
+          jf evd create --predicate ./run_info.json --predicate-type https://in-toto.io/attestation/test-result/v0.1 --build-name 111111 --build-number $JFROG_CLI_BUILD_NUMBER --key ./private.pem
 #          jfrog rt bdc workshop-docker-local --image-file image-file-details --build-name $build-name --build-number $build-number
